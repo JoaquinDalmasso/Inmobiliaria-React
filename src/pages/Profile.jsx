@@ -45,12 +45,12 @@ export default function Profile() {
   );
   };
   return (
-    <div className="p-3 max-w-lg mx-auto">
+    <div className="max-w-lg p-3 mx-auto">
       <h1 className='text-3xl font-semibold text-center my-7'>Profile</h1>
       <form className="flex flex-col gap-4">
         <input onChange={(e) => setFile(e.target.files[0])} type="file" ref={fileRef} hidden accept='image/*' />
-        <img src={formData.avatar || currentUser.avatar} alt="profile" className="rounded-full h-24 w-24 object-cover cursor-pointer self-center mt-2" onClick={() => fileRef.current.click()} />
-        <p className="text-sm self-center">
+        <img src={formData.avatar || currentUser.avatar} alt="profile" className="self-center object-cover w-24 h-24 mt-2 rounded-full cursor-pointer" onClick={() => fileRef.current.click()} />
+        <p className="self-center text-sm">
           {fileUploadError?
           (<span className="text-red-700">Error Image Upload (image must be less than 2 mb)</span>) :
           filePerc > 0 && filePerc < 100 ? (
@@ -61,10 +61,10 @@ export default function Profile() {
               ""
         }
         </p>
-        <input type="text" placeholder="username" className="border p-3 rounded-lg" id='username' />
-        <input type="text" placeholder="email" className="border p-3 rounded-lg" id='email' />
-        <input type="text" placeholder="password" className="border p-3 rounded-lg" id='password'/>
-        <button className="bg-slate-700 text-white rounded-lg p-3 uppercase hover:opacity-95 disable:opacity-80"></button>
+        <input type="text" placeholder="username" className="p-3 border rounded-lg" id='username' defaultValue={currentUser.username} />
+        <input type="text" placeholder="email" className="p-3 border rounded-lg" id='email' defaultValue={currentUser.email}/>
+        <input type="text" placeholder="password" className="p-3 border rounded-lg" id='password'/>
+        <button className="p-3 text-white uppercase rounded-lg bg-slate-700 hover:opacity-95 disable:opacity-80">Update</button>
       </form>
       <div className="flex justify-between mt-5">
         <span className="text-red-500 cursor-pointer">Delete Account</span>
