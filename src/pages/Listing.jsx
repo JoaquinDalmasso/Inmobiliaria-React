@@ -9,7 +9,6 @@ import {
     FaBath,
     FaBed,
     FaChair,
-    FaMapMarkedAlt,
     FaMapMarkerAlt,
     FaParking,
     FaShare,
@@ -79,7 +78,7 @@ export default function Listing() {
                         Link copied!
                     </p>
                 )}
-                <div className='flex flex-col max-w-4xl mx-auto p-3 my-7 gap-4'>
+                <div className='flex flex-col max-w-4xl gap-4 p-3 mx-auto my-7'>
                     <p className='text-2xl font-semibold'>
                         {listing.name} - ${' '}
                         {listing.offer
@@ -87,7 +86,7 @@ export default function Listing() {
                             : listing.regularPrice.toLocaleString('en-US')}
                         {listing.type === 'rent' && ' / month'}
                     </p>
-                    <p className='flex items-center mt-6 gap-2 text-slate-600  text-sm'>
+                    <p className='flex items-center gap-2 mt-6 text-sm text-slate-600'>
                         <FaMapMarkerAlt className='text-green-700' />
                         {listing.address}
                     </p>
@@ -105,6 +104,35 @@ export default function Listing() {
                         <span className='font-semibold text-black'>Description - </span>
                         {listing.description}
                     </p>
+                    <ul className='flex flex-wrap items-center gap-4 text-sm font-semibold text-green-900 sm:gap-6'>
+                        <li className='flex items-center gap-1 whitespace-nowrap '>
+                            <FaBed className="text-lg" />
+                            {listing.bedrooms > 1 ? `${listing.bedrooms} beds`: `${listing.bedrooms} bed`}
+                        </li>
+                        <li className='flex items-center gap-1 whitespace-nowrap '>
+                            <FaBath className='text-lg' />
+                            {listing.bathrooms > 1
+                            ? `${listing.bathrooms} baths `
+                            : `${listing.bathrooms} bath `}
+                        </li>
+                        <li className='flex items-center gap-1 whitespace-nowrap '>
+                            <FaParking className='text-lg' />
+                            {listing.parking ? 'Parking spot' : 'No Parking'}
+                        </li>
+                        <li className='flex items-center gap-1 whitespace-nowrap '>
+                            <FaChair className='text-lg' />
+                            {listing.furnished ? 'Furnished' : 'Unfurnished'}
+                        </li>
+                    </ul>
+                    {currentUser && listing.userRef !== currentUser._id && !contact && (
+                    <button
+                        onClick={() => setContact(true)}
+                        className='p-3 text-white uppercase rounded-lg bg-slate-700 hover:opacity-95'
+                    >
+                        Contact landlord
+                    </button>
+                    )}
+                    {contact && <Contact listing={listing} />}
                 </div>
             </div>
         )}
